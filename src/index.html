@@ -20,41 +20,55 @@
     <button class="roatate-counter_clockwise">Rotate <-</button>
 
             <!-- <script type="module">
-        import { RotateImage } from './rotateimage.js';
+                import { Image } from './canvasImage.js';
 
-        const rotate = new RotateImage();
+                const canvas = document.getElementById('rotate-canvas');
+                const context = canvas.getContext('2d');
+                const element = document.createElement('img');
+                const imageURI = './ben.jpg';
 
-        rotate.imageObject.onload = e => {
-            console.log(e);
-            rotate.context.drawImage(rotate.imageObject, 1000, 2000)
-        }
 
-        rotate.imageObject.src = './ben.jpg';
-    </script> -->
+                const image = new Image(canvas, context, element, imageURI);
+
+
+                console.dir(image.element)
+            </script> -->
+
             <script>
                 const canvas = document.getElementById('rotate-canvas');
                 const context = canvas.getContext('2d');
-                const imageObject = document.createElement('img');
+                const imageElement = document.createElement('img');
 
                 const s_roatateRight = document.querySelector('.roatate-clockwise');
                 const s_roatateLeft = document.querySelector('.roatate-counter_clockwise');
 
                 let angleInDegrees = 0;
+                let canvasWidth = canvas.width;
+                let canvasHeight = canvas.height;
+                let imageWidth = imageElement.width;
+                let imageHeight = imageElement.height;
 
-                imageObject.onload = e => {
-                    console.log(`Canvas image event: ${e.type}`);
-                    // context.drawImage(imageObject, 0, 0);
-                    context.drawImage(imageObject, canvas.width / 2 - imageObject.width / 2, canvas.height / 2 - imageObject.height / 2);
+                imageElement.src = './ben.jpg';
+
+                imageElement.onload = () => {
+                    canvasWidth = canvas.width;
+                    canvasHeight = canvas.height;
+                    imageWidth = imageElement.width;
+                    imageHeight = imageElement.height;
+                    context.drawImage(imageElement, canvasWidth / 2 - imageWidth / 2, canvasHeight / 2 - imageHeight / 2);
                 }
 
-                imageObject.src = './ben.jpg';
-
                 function drawRotated(degrees) {
+                    canvasWidth = canvas.width;
+                    canvasHeight = canvas.height;
+                    imageWidth = imageElement.width;
+                    imageHeight = imageElement.height;
+
                     context.clearRect(0, 0, canvas.width, canvas.height);
                     context.save();
                     context.translate(canvas.width / 2, canvas.height / 2);
                     context.rotate(degrees * Math.PI / 180);
-                    context.drawImage(imageObject, -imageObject.width / 2, -imageObject.width / 2);
+                    context.drawImage(imageElement, -imageElement.width / 2, -imageElement.width / 2);
                     context.restore();
                 }
 
