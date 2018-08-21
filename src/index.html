@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas Image rotation</title>
+    <style>
+        #rotate {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="rotate" width="1544" height="1160"></canvas>
+
+    <!-- <script type="module">
+        import { RotateImage } from './rotateimage.js';
+
+        const rotate = new RotateImage();
+
+        rotate.imageObject.onload = e => {
+            console.log(e);
+            rotate.context.drawImage(rotate.imageObject, 1000, 2000)
+        }
+
+        rotate.imageObject.src = './ben.jpg';
+    </script> -->
+    <script>
+        const canvas = document.getElementById('rotate');
+        const context = canvas.getContext('2d');
+        const imageObject = new Image();
+
+        imageObject.src = './ben.jpg';
+
+        imageObject.onload = e => {
+            console.log(e);
+            context.drawImage(imageObject, 0, 0)
+        }
+
+
+    </script>
+
+</body>
+
+</html>
