@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Canvas Image rotation</title>
     <style>
-        #rotate {
+        #rotate-canvas {
             width: 100%;
             height: auto;
         }
@@ -15,9 +15,11 @@
 </head>
 
 <body>
-    <canvas id="rotate" width="1544" height="1160"></canvas>
+    <canvas id="rotate-canvas" width="1544" height="1160"></canvas>
+    <button class="roatate-clockwise">Rotate -></button>
+    <button class="roatate-counter_clockwise">Rotate <-</button>
 
-    <!-- <script type="module">
+            <!-- <script type="module">
         import { RotateImage } from './rotateimage.js';
 
         const rotate = new RotateImage();
@@ -29,20 +31,43 @@
 
         rotate.imageObject.src = './ben.jpg';
     </script> -->
-    <script>
-        const canvas = document.getElementById('rotate');
-        const context = canvas.getContext('2d');
-        const imageObject = new Image();
+            <script>
+                const canvas = document.getElementById('rotate-canvas');
+                const context = canvas.getContext('2d');
+                const imageObject = document.createElement('img');
 
-        imageObject.src = './ben.jpg';
+                const s_roatateRight = document.querySelector('.roatate-clockwise');
+                const s_roatateLeft = document.querySelector('.roatate-counter_clockwise');
 
-        imageObject.onload = e => {
-            console.log(e);
-            context.drawImage(imageObject, 0, 0)
-        }
+                let angleInDegrees = 0;
 
+                imageObject.onload = e => {
+                    console.log(`Canvas image event: ${e.type}`);
+                    // context.drawImage(imageObject, 0, 0);
+                    context.drawImage(imageObject, canvas.width / 2 - imageObject.width / 2, canvas.height / 2 - imageObject.height / 2);
+                }
 
-    </script>
+                imageObject.src = './ben.jpg';
+
+                function drawRotated(degrees) {
+                    context.clearRect(0, 0, canvas.width, canvas.height);
+                    context.save();
+                    context.translate(canvas.width / 2, canvas.height / 2);
+                    context.rotate(degrees * Math.PI / 180);
+                    context.drawImage(imageObject, -imageObject.width / 2, -imageObject.width / 2);
+                    context.restore();
+                }
+
+                s_roatateRight.addEventListener('click', () => {
+                    angleInDegrees += 90;
+                    drawRotated(angleInDegrees);
+                });
+
+                s_roatateLeft.addEventListener('click', () => {
+                    angleInDegrees -= 90;
+                    drawRotated(angleInDegrees);
+                });
+            </script>
 
 </body>
 
