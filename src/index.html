@@ -8,35 +8,60 @@
     <title>Canvas Image rotation</title>
     <style>
         #rotate-canvas {
-            width: 100%;
-            height: auto;
-        }`
+            /* width: 80vw; */
+            /* height: auto; */
+        }
+        hr{
+            border: 1px dashed grey;
+        }
     </style>
 </head>
 
 <body>
     <canvas id="rotate-canvas" width="2512" height="1413"></canvas>
+    <hr>
     <button class="roatate-clockwise">Rotate -></button>
     <button class="roatate-counter_clockwise">Rotate <-</button>
 
-            <!-- <script type="module">
+            <script type="module">
                 import { Image } from './canvasImage.js';
+
+                const s_roatateRight = document.querySelector('.roatate-clockwise');
+                const s_roatateLeft = document.querySelector('.roatate-counter_clockwise');
+
+                let angleInDegrees = 0;
 
                 const canvas = document.getElementById('rotate-canvas');
                 const context = canvas.getContext('2d');
-                const element = document.createElement('img');
+                const imageElement = document.createElement('img');
                 const imageURI = './ben.jpg';
 
+                const image = new Image(canvas, context, imageElement, imageURI);
 
-                const image = new Image(canvas, context, element, imageURI);
+                function drawRotated(degrees) {
 
+                    context.clearRect(0, 0, canvas.width, canvas.height);
+                    context.save();
+                    context.translate(image.canvas.width / 2, image.canvas.height / 2);
+                    context.rotate(degrees * Math.PI / 180);
+                    context.drawImage(image.element, -image.element.width / 2, -image.element.width / 2);
+                    context.restore();
+                }
 
-                console.log(image.element);
-                console.log(Image);
-            </script> -->
+                s_roatateRight.addEventListener('click', () => {
+                    angleInDegrees += 90;
+                    drawRotated(angleInDegrees);
+                });
 
-            <script>
-                const canvas = document.getElementById('rotate-canvas');
+                s_roatateLeft.addEventListener('click', () => {
+                    angleInDegrees -= 90;
+                    drawRotated(angleInDegrees);
+                });
+
+            </script>
+
+            <!-- <script>
+                const canvas = document.getElementById('rotate-canvas2');
                 const context = canvas.getContext('2d');
                 const imageElement = document.createElement('img');
 
@@ -82,7 +107,7 @@
                     angleInDegrees -= 90;
                     drawRotated(angleInDegrees);
                 });
-            </script>
+            </script> -->
 
 </body>
 
