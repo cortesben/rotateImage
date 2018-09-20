@@ -19,9 +19,9 @@
 
 <body>
     <canvas id="rotate-canvas" width="2512" height="1413"></canvas>
-    <hr>
-    <button class="roatate-clockwise">Rotate -></button>
+    <br>
     <button class="roatate-counter_clockwise">Rotate <-</button>
+    <button class="roatate-clockwise">Rotate -></button>
 
             <script type="module">
                 import { Image } from './canvasImage.js';
@@ -29,7 +29,7 @@
                 const s_roatateRight = document.querySelector('.roatate-clockwise');
                 const s_roatateLeft = document.querySelector('.roatate-counter_clockwise');
 
-                let angleInDegrees = 0;
+                let angleInDegrees = 10;
 
                 const canvas = document.getElementById('rotate-canvas');
                 const context = canvas.getContext('2d');
