@@ -49,12 +49,12 @@
                 }
 
                 s_roatateRight.addEventListener('click', () => {
-                    angleInDegrees += 90;
+                    angleInDegrees -= 90;
                     drawRotated(angleInDegrees);
                 });
 
                 s_roatateLeft.addEventListener('click', () => {
-                    angleInDegrees -= 90;
+                    angleInDegrees += 90;
                     drawRotated(angleInDegrees);
                 });
 
